@@ -85,10 +85,14 @@ class CreateController extends GetxController with CreateVariables {
               .failureSnackbar("No Network Connection");
         } else {
           updateNote();
+
+          Get.back();
+          Get.back(result: {
+            "title": titleController.text,
+            "description": descriptionController.text
+          });
           titleController.text = "";
           descriptionController.text = "";
-          Get.back();
-          Get.back();
         }
       } else {
         if (!isNetworkAvailable.value) {
@@ -101,10 +105,10 @@ class CreateController extends GetxController with CreateVariables {
           descriptionController.text = "";
           Get.back();
           Get.back();
+          Get.put(HomeController());
+          Get.find<HomeController>().init();
         }
       }
-      Get.put(HomeController());
-      Get.find<HomeController>().init();
     }
   }
 }

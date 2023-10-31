@@ -93,7 +93,13 @@ class CreateView extends GetResponsiveView<CreateController> {
                 ),
                 InkWell(
                   onTap: () async {
-                    dialogBox(false);
+                    if (controller.titleController.text.trim() != "" &&
+                        controller.descriptionController.text.trim() != "") {
+                      dialogBox(false);
+                    } else {
+                      SnackbarUtils.instance
+                          .failureSnackbar("Please Enter Note");
+                    }
                   },
                   child: Container(
                     height: 50,
@@ -131,13 +137,10 @@ class CreateView extends GetResponsiveView<CreateController> {
           TextFormField(
             autofocus: true,
             controller: controller.titleController,
-            enabled: true,
             cursorColor: Colors.white,
-            keyboardType: TextInputType.multiline,
             style: GoogleFonts.nunito(
                 color: Colors.white, fontSize: 35, fontWeight: FontWeight.w400),
-            maxLines: 1,
-            textInputAction: TextInputAction.newline,
+            maxLines: null,
             decoration: InputDecoration(
                 hintStyle: GoogleFonts.nunito(
                     color: AppColors.lightGrey,
@@ -146,14 +149,15 @@ class CreateView extends GetResponsiveView<CreateController> {
                 hintText: AppStrings.titleHintText,
                 border: InputBorder.none),
           ),
+          const SizedBox(
+            height: 10,
+          ),
           TextFormField(
             controller: controller.descriptionController,
-            enabled: true,
             cursorColor: Colors.white,
-            keyboardType: TextInputType.multiline,
             style: GoogleFonts.nunito(
                 color: Colors.white, fontSize: 23, fontWeight: FontWeight.w400),
-            maxLines: 1,
+            maxLines: null,
             textInputAction: TextInputAction.newline,
             decoration: InputDecoration(
                 hintText: AppStrings.descriptionHintText,

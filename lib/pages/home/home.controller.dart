@@ -33,7 +33,7 @@ class HomeController extends GetxController with HomeVariables {
   }
 
   init() async {
-     final connectivityResult = await (Connectivity().checkConnectivity());
+    final connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
       isNetworkAvailable.value = false;
     } else {
@@ -43,8 +43,8 @@ class HomeController extends GetxController with HomeVariables {
   }
 
   getNotes() async {
-     if (!isNetworkAvailable.value) {
-     return SnackbarUtils.instance.failureSnackbar("No Network Connection");
+    if (!isNetworkAvailable.value) {
+      return SnackbarUtils.instance.failureSnackbar("No Network Connection");
     }
     Map<String, String>? header = {};
     header["Content-Type"] = "application/json";
@@ -68,8 +68,8 @@ class HomeController extends GetxController with HomeVariables {
   }
 
   deleteNote(note) async {
-     if (!isNetworkAvailable.value) {
-     return SnackbarUtils.instance.failureSnackbar("No Network Connection");
+    if (!isNetworkAvailable.value) {
+      return SnackbarUtils.instance.failureSnackbar("No Network Connection");
     }
     Map<String, String>? header = {};
     header["Content-Type"] = "application/json";
@@ -80,15 +80,16 @@ class HomeController extends GetxController with HomeVariables {
       notes.remove(note);
       notes.refresh();
     } catch (e) {
-     SnackbarUtils.instance.failureSnackbar(e.toString());
+      SnackbarUtils.instance.failureSnackbar(e.toString());
     }
   }
 
-  viewNavigation(data) {
+  viewNavigation(data) async {
     Get.put(ViewController());
-    Get.to(ViewView(
+    await Get.to(ViewView(
       note: data,
     ));
+    getNotes();
   }
 
   searchNavigation() {

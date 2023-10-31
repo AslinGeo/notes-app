@@ -28,10 +28,18 @@ class ViewController extends GetxController with ViewVariables {
     description.value = viewNote["description"];
   }
 
-  editNavigation() {
+  editNavigation() async {
     Get.put(CreateController());
-    Get.to(CreateView(
+    var result = await Get.to(CreateView(
       note: viewNote,
     ));
+    if (result != null) {
+      title.value = result["title"];
+      description.value = result["description"];
+      viewNote["title"] = title.value;
+      viewNote["description"] = description.value;
+      description.refresh();
+      title.refresh();
+    }
   }
 }

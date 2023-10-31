@@ -65,7 +65,7 @@ class ViewView extends GetResponsiveView<ViewController> {
               children: [
                 InkWell(
                   onTap: () async {
-                    controller.editNavigation();
+                    await controller.editNavigation();
                   },
                   child: Container(
                     height: 50,
@@ -93,40 +93,40 @@ class ViewView extends GetResponsiveView<ViewController> {
   }
 
   body() {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 40,
-        ),
-        SingleChildScrollView(
-          child: Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24),
-              child: Column(
-                children: [
-                  Text(
-                    controller.title.value,
-                    style: GoogleFonts.nunito(
-                        color: Colors.white,
-                        fontSize: 35,
-                        fontWeight: FontWeight.w400),
+    return Obx(() => Column(
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            SingleChildScrollView(
+              child: Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 24, right: 24),
+                  child: Column(
+                    children: [
+                      Text(
+                        controller.title.value,
+                        style: GoogleFonts.nunito(
+                            color: Colors.white,
+                            fontSize: 35,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        controller.description.value,
+                        style: GoogleFonts.nunito(
+                            color: Colors.white,
+                            fontSize: 23,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    controller.description.value,
-                    style: GoogleFonts.nunito(
-                        color: Colors.white,
-                        fontSize: 23,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-      ],
-    );
+          ],
+        ));
   }
 }

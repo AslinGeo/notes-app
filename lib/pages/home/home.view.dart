@@ -138,11 +138,11 @@ class HomeView extends GetResponsiveView<HomeController> {
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.primary
+        color: AppColors.lightGrey
             .withOpacity(0.4), // Background color of the FloatingActionButton
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary
+            color: AppColors.lightGrey
                 .withOpacity(0.4), // Customize the shadow color here
             offset:
                 const Offset(0, 3), // Change the shadow's position as needed
