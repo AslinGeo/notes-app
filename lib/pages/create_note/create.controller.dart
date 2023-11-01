@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/constants/api_urls.dart';
+import 'package:notes_app/constants/loader.dart';
 import 'package:notes_app/constants/snack_bar.dart';
 import 'package:notes_app/pages/create_note/create.variable.dart';
 import 'package:http/http.dart' as http;
@@ -48,9 +50,11 @@ class CreateController extends GetxController with CreateVariables {
     header["Content-Type"] = "application/json";
 
     try {
+      Loader().showOverlayLoader();
       final response = await http.post(Uri.parse(ApiUrls.baseUrl),
           body: jsonEncode(json), headers: header);
       print(response);
+      Navigator.pop(Get.context!);
     } catch (e) {
       SnackbarUtils.instance.failureSnackbar(e.toString());
     }
@@ -64,11 +68,13 @@ class CreateController extends GetxController with CreateVariables {
     header["Content-Type"] = "application/json";
 
     try {
+      // Loader().showOverlayLoader();
       final response = await http.put(
           Uri.parse("${ApiUrls.baseUrl}/${note.value["id"]}"),
           body: jsonEncode(json),
           headers: header);
       print(response);
+      // Navigator.pop(Get.context!);
     } catch (e) {
       SnackbarUtils.instance.failureSnackbar(e.toString());
     }

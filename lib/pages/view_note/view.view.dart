@@ -98,10 +98,10 @@ class ViewView extends GetResponsiveView<ViewController> {
             const SizedBox(
               height: 40,
             ),
-            SingleChildScrollView(
-              child: Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 24),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 24, right: 24),
+                child: SingleChildScrollView(
                   child: Column(
                     children: [
                       Text(

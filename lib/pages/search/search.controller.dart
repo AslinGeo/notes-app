@@ -1,13 +1,15 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/constants/api_urls.dart';
+import 'package:notes_app/constants/loader.dart';
 import 'package:notes_app/constants/snack_bar.dart';
 import 'package:notes_app/pages/search/search.variable.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-class SearchController extends GetxController with SearchVariables {
+class SearchPageController extends GetxController with SearchVariables {
   @override
   void onInit() {
     super.onInit();
@@ -41,15 +43,17 @@ class SearchController extends GetxController with SearchVariables {
 
   getNotes() async {
     if (!isNetworkAvailable.value) {
-    return  SnackbarUtils.instance.failureSnackbar("No Network Connection");
+      return SnackbarUtils.instance.failureSnackbar("No Network Connection");
     }
     Map<String, String>? header = {};
     header["Content-Type"] = "application/json";
     try {
+      Loader().showOverlayLoader();
       final response =
           await http.get(Uri.parse(ApiUrls.baseUrl), headers: header);
       final responsebody = json.decode(response.body);
       notes.value = responsebody["data"];
+      Navigator.pop(Get.context!);
     } catch (e) {
       SnackbarUtils.instance.failureSnackbar(e.toString());
     }

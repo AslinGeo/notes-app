@@ -5,6 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/constants/api_urls.dart';
+import 'package:notes_app/constants/loader.dart';
 import 'package:notes_app/constants/snack_bar.dart';
 import 'package:notes_app/pages/home/home.variable.dart';
 import 'package:http/http.dart' as http;
@@ -49,10 +50,12 @@ class HomeController extends GetxController with HomeVariables {
     Map<String, String>? header = {};
     header["Content-Type"] = "application/json";
     try {
+      Loader().showOverlayLoader();
       final response =
           await http.get(Uri.parse(ApiUrls.baseUrl), headers: header);
       final responsebody = json.decode(response.body);
       notes.value = responsebody["data"];
+      Navigator.pop(Get.context!);
     } catch (e) {
       SnackbarUtils.instance.failureSnackbar(e.toString());
     }
@@ -74,11 +77,13 @@ class HomeController extends GetxController with HomeVariables {
     Map<String, String>? header = {};
     header["Content-Type"] = "application/json";
     try {
+      Loader().showOverlayLoader();
       final response = await http.delete(
           Uri.parse("${ApiUrls.baseUrl}/${note["id"]}"),
           headers: header);
       notes.remove(note);
       notes.refresh();
+       Navigator.pop(Get.context!);
     } catch (e) {
       SnackbarUtils.instance.failureSnackbar(e.toString());
     }
@@ -93,7 +98,7 @@ class HomeController extends GetxController with HomeVariables {
   }
 
   searchNavigation() {
-    Get.put(SearchController());
+    Get.put(SearchPageController());
     Get.to(SearchView());
   }
 }

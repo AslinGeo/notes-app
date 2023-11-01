@@ -7,7 +7,7 @@ import 'package:notes_app/constants/strings.dart';
 import 'package:notes_app/pages/home/home.view.dart';
 import 'package:notes_app/pages/search/search.controller.dart';
 
-class SearchView extends GetResponsiveView<SearchController> {
+class SearchView extends GetResponsiveView<SearchPageController> {
   SearchView({super.key}) {
     controller.init();
   }
