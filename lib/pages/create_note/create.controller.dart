@@ -36,6 +36,7 @@ class CreateController extends GetxController with CreateVariables {
     } else {
       isNetworkAvailable.value = true;
     }
+    note.value = Get.arguments ?? {};
     if (note.isNotEmpty) {
       titleController.text = note.value["title"];
       descriptionController.text = note.value["description"];
