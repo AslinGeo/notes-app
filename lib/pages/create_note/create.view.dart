@@ -9,12 +9,10 @@ import 'package:notes_app/pages/create_note/create.controller.dart';
 import 'package:notes_app/pages/home/home.controller.dart';
 
 class CreateView extends GetResponsiveView<CreateController> {
-  Map? note;
+ 
 
-  CreateView({super.key, this.note}) {
-    if (note != null) {
-      controller.note.value = note!;
-    }
+  CreateView({super.key}) {
+   
     controller.init();
   }
   @override

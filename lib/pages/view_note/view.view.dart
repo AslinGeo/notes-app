@@ -6,10 +6,8 @@ import 'package:notes_app/constants/colors.dart';
 import 'package:notes_app/pages/view_note/view.controller.dart';
 
 class ViewView extends GetResponsiveView<ViewController> {
-  ViewView({super.key, required note}) {
-    if (note != null) {
-      controller.viewNote = note;
-    }
+  ViewView({super.key}) {
+    
     controller.init();
   }
 

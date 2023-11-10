@@ -5,6 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/constants/api_urls.dart';
+import 'package:notes_app/constants/app_paths.dart';
 import 'package:notes_app/constants/loader.dart';
 import 'package:notes_app/constants/snack_bar.dart';
 import 'package:notes_app/pages/home/home.variable.dart';
@@ -83,22 +84,18 @@ class HomeController extends GetxController with HomeVariables {
           headers: header);
       notes.remove(note);
       notes.refresh();
-       Navigator.pop(Get.context!);
+      Navigator.pop(Get.context!);
     } catch (e) {
       SnackbarUtils.instance.failureSnackbar(e.toString());
     }
   }
 
   viewNavigation(data) async {
-    Get.put(ViewController());
-    await Get.to(ViewView(
-      note: data,
-    ));
+    await Get.toNamed(AppPaths.view, arguments: data);
     getNotes();
   }
 
   searchNavigation() {
-    Get.put(SearchPageController());
-    Get.to(SearchView());
+    Get.toNamed(AppPaths.search);
   }
 }

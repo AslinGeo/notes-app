@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:notes_app/constants/colors.dart';
-import 'package:notes_app/pages/home/home.controller.dart';
-import 'package:notes_app/pages/home/home.view.dart';
+import 'package:notes_app/constants/routes.dart';
+
 
 void main() {
   SystemChrome.setPreferredOrientations(
@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
     return GetMaterialApp(
       title: 'Notes App',
       theme: ThemeData(
@@ -37,7 +36,8 @@ class MyApp extends StatelessWidget {
         primaryColor: AppColors.primary,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      initialRoute: AppRoutes.inital,
+      getPages: AppRoutes.route,
     );
   }
 }
